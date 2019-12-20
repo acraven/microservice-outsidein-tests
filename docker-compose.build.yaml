@@ -8,7 +8,13 @@ services:
         version: 0.0.0
     environment:
       - KESTREL__ENDPOINTS__HTTP__URL=http://*:5000
+      - MONGODB__CONNECTIONSTRING=mongodb://mongo:27017/demo
       - ASPNETCORE_ENVIRONMENT=Compose
+    depends_on:
+      - mongo
+
+  mongo:
+    image: mongo:4.2
 
   outside-in.tests:
     build:

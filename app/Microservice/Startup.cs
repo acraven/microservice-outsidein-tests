@@ -12,7 +12,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microservice.Components;
 using Microservice.Dependencies.ObjectStore;
-using Microservice.Dependencies.ObjectStore.InMemory;
+using Microservice.Dependencies.ObjectStore.MongoDb;
 
 namespace Microservice
 {
@@ -33,7 +33,8 @@ namespace Microservice
             services.AddHttpContextAccessor();
 
             services.AddSingleton<ITenantAccessor, RequestHeaderTenantAccessor>();
-            services.AddSingleton<IAggregateStore, InMemoryAggregateStore>();
+            services.AddSingleton<IAggregateStore, MongoDbAggregateStore>();
+            services.AddSingleton<IMongoDbClient, MongoDbClient>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
