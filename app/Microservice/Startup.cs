@@ -10,6 +10,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microservice.Components;
+using Microservice.Dependencies.ObjectStore;
+using Microservice.Dependencies.ObjectStore.InMemory;
 
 namespace Microservice
 {
@@ -26,6 +29,11 @@ namespace Microservice
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+
+            services.AddHttpContextAccessor();
+
+            services.AddSingleton<ITenantAccessor, RequestHeaderTenantAccessor>();
+            services.AddSingleton<IAggregateStore, InMemoryAggregateStore>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
