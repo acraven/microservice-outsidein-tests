@@ -1,4 +1,4 @@
-docker-compose -f docker-compose.build.yaml build --no-cache --parallel
+docker-compose -f docker-compose.build.yaml build
 
 if ($? -eq $false) {
   exit
